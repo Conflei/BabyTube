@@ -14,6 +14,8 @@
 		81A6E96F21532683006F0FD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81A6E96D21532683006F0FD9 /* LaunchScreen.storyboard */; };
 		81A6E97A21532683006F0FD9 /* BabyTubeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A6E97921532683006F0FD9 /* BabyTubeTests.swift */; };
 		81A6E98521532683006F0FD9 /* BabyTubeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A6E98421532683006F0FD9 /* BabyTubeUITests.swift */; };
+		81A6E99A21549BFC006F0FD9 /* VideoTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A6E99821549BFC006F0FD9 /* VideoTableCell.swift */; };
+		81A6E99B21549BFC006F0FD9 /* VideoTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81A6E99921549BFC006F0FD9 /* VideoTableCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		81A6E98021532683006F0FD9 /* BabyTubeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BabyTubeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		81A6E98421532683006F0FD9 /* BabyTubeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyTubeUITests.swift; sourceTree = "<group>"; };
 		81A6E98621532683006F0FD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81A6E99821549BFC006F0FD9 /* VideoTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableCell.swift; sourceTree = "<group>"; };
+		81A6E99921549BFC006F0FD9 /* VideoTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoTableCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 				81A6E96421532680006F0FD9 /* AppDelegate.swift */,
 				81A6E96621532681006F0FD9 /* ViewController.swift */,
 				81A6E96821532681006F0FD9 /* Main.storyboard */,
+				81A6E99821549BFC006F0FD9 /* VideoTableCell.swift */,
+				81A6E99921549BFC006F0FD9 /* VideoTableCell.xib */,
 				81A6E96B21532683006F0FD9 /* Assets.xcassets */,
 				81A6E96D21532683006F0FD9 /* LaunchScreen.storyboard */,
 				81A6E97021532683006F0FD9 /* Info.plist */,
@@ -231,6 +237,7 @@
 			files = (
 				81A6E96F21532683006F0FD9 /* LaunchScreen.storyboard in Resources */,
 				81A6E96C21532683006F0FD9 /* Assets.xcassets in Resources */,
+				81A6E99B21549BFC006F0FD9 /* VideoTableCell.xib in Resources */,
 				81A6E96A21532681006F0FD9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,6 +265,7 @@
 			files = (
 				81A6E96721532681006F0FD9 /* ViewController.swift in Sources */,
 				81A6E96521532680006F0FD9 /* AppDelegate.swift in Sources */,
+				81A6E99A21549BFC006F0FD9 /* VideoTableCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
