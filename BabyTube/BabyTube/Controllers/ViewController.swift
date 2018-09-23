@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
@@ -27,22 +29,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.table.delegate = self
         self.table.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         isShowingSearchBar = false
-        setUpVideos()
-        setUpSearchBar()
+        //setUpVideos(videoArray: VideoModel.retriveVideosFromStaticSource())
+        setUpVideos(videoArray: VideoModel.retriveVideosFromYoutube(query: "Post Malone"))
     }
 
-    private func setUpVideos()
+    private func setUpVideos(videoArray: [Video])
     {
-        videoArray.append(Video(title: "Episode 1", videoImg: #imageLiteral(resourceName: "1"), channel: "The Office US", type: VideoType.episode, duration: "3:11", date: "Published on Sep 21, 2027"))
-        videoArray.append(Video(title: "Best Prank", videoImg: #imageLiteral(resourceName: "2"), channel: "The Office Jokes", type: VideoType.movie, duration: "3:12", date: "Published on Sep 22, 2017"))
-        videoArray.append(Video(title: "Best Shows Ep 2", videoImg: #imageLiteral(resourceName: "5"), channel: "Best of Netflix ", type: VideoType.episode, duration: "3:13", date: "Published on Sep 27, 2013"))
-        videoArray.append(Video(title: "Episode 2", videoImg: #imageLiteral(resourceName: "4"), channel: "The Office US", type: VideoType.episode, duration: "3:14", date: "Published on Sep 17, 2017"))
-        videoArray.append(Video(title: "Jim and Pam", videoImg: #imageLiteral(resourceName: "2"), channel: "Best of Netflix ", type: VideoType.movie, duration: "3:15", date: "Published on Sep 21, 2011"))
-        
-    }
-    
-    private func setUpSearchBar()
-    {
+        self.videoArray = videoArray
         
     }
     
@@ -62,11 +55,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if(videoArray[indexPath.row].type.rawValue == "Episode")
         {
-            cell.type.image = #imageLiteral(resourceName: "episode")
+            cell.type.image = #imageLiteral(resourceName: "episode") //Meaning Episodes
         }
         else
         {
-           cell.type.image = #imageLiteral(resourceName: "movie")
+           cell.type.image = #imageLiteral(resourceName: "movie") //Meaning Solo Video or Movie
         }
         
         return cell
@@ -78,7 +71,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    @IBAction func ShowSearchBar(_ sender: Any) {
+    @IBAction func showSearchBar(_ sender: Any) {
         if(!isShowingSearchBar)
         {
             logoImage.isHidden = true
@@ -97,7 +90,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    @IBAction func SearchAction(_ sender: Any) {
+    @IBAction func searchAction(_ sender: Any) {
         print("Search Now: "+searchBar.text!)
         searchBar.resignFirstResponder()
     }

@@ -1,0 +1,6 @@
+framework module Pods_BabyTube {
+  umbrella header "Pods-BabyTube-umbrella.h"
+
+  export *
+  module * { export * }
+}
