@@ -12,9 +12,12 @@ class VideoTableCell: UITableViewCell {
 
     @IBOutlet weak var videoImg: UIImageView!
     
+    @IBOutlet weak var type: UIImageView!
+    
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var channel: UILabel!
-    @IBOutlet weak var typeVideo: UILabel!
+    @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var duration: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

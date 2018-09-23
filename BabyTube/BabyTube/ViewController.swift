@@ -19,16 +19,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.table.delegate = self
+        self.table.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         setUpVideos()
     }
 
     private func setUpVideos()
     {
-        videoArray.append(Video(title: "Episode 1", videoImg: #imageLiteral(resourceName: "1"), channel: "The Office US", type: VideoType.episode))
-        videoArray.append(Video(title: "Best Prank", videoImg: #imageLiteral(resourceName: "2"), channel: "The Office Jokes", type: VideoType.movie))
-        videoArray.append(Video(title: "Best Shows Ep 2", videoImg: #imageLiteral(resourceName: "5"), channel: "Best of Netflix ", type: VideoType.episode))
-        videoArray.append(Video(title: "Episode 2", videoImg: #imageLiteral(resourceName: "4"), channel: "The Office US", type: VideoType.episode))
-        videoArray.append(Video(title: "Jim and Pam", videoImg: #imageLiteral(resourceName: "2"), channel: "Best of Netflix ", type: VideoType.movie))
+        videoArray.append(Video(title: "Episode 1", videoImg: #imageLiteral(resourceName: "1"), channel: "The Office US", type: VideoType.episode, duration: "3:11", date: "Published on Sep 21, 2027"))
+        videoArray.append(Video(title: "Best Prank", videoImg: #imageLiteral(resourceName: "2"), channel: "The Office Jokes", type: VideoType.movie, duration: "3:12", date: "Published on Sep 22, 2017"))
+        videoArray.append(Video(title: "Best Shows Ep 2", videoImg: #imageLiteral(resourceName: "5"), channel: "Best of Netflix ", type: VideoType.episode, duration: "3:13", date: "Published on Sep 27, 2013"))
+        videoArray.append(Video(title: "Episode 2", videoImg: #imageLiteral(resourceName: "4"), channel: "The Office US", type: VideoType.episode, duration: "3:14", date: "Published on Sep 17, 2017"))
+        videoArray.append(Video(title: "Jim and Pam", videoImg: #imageLiteral(resourceName: "2"), channel: "Best of Netflix ", type: VideoType.movie, duration: "3:15", date: "Published on Sep 21, 2011"))
         
     }
     
@@ -41,12 +43,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         cell.title.text = videoArray[indexPath.row].title
         cell.channel.text = videoArray[indexPath.row].channel
-        cell.typeVideo.text = videoArray[indexPath.row].type.rawValue
+        cell.date.text = videoArray[indexPath.row].date
+        cell.duration.text = videoArray[indexPath.row].duration
+        
         cell.videoImg.image = videoArray[indexPath.row].videoImg
         
+        if(videoArray[indexPath.row].type.rawValue == "Episode")
+        {
+            cell.type.image = #imageLiteral(resourceName: "episode")
+        }
+        else
+        {
+           cell.type.image = #imageLiteral(resourceName: "movie")
+        }
         
         return cell
     }
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 330
@@ -60,14 +73,18 @@ class Video {
     let title: String
     let videoImg: UIImage
     let channel: String
+    let duration: String
+    let date: String
     let type: VideoType
     
-    init(title: String, videoImg: UIImage, channel: String, type: VideoType)
+    init(title: String, videoImg: UIImage, channel: String, type: VideoType, duration: String, date: String)
     {
         self.title = title
         self.videoImg = videoImg
         self.channel = channel
         self.type = type
+        self.duration = duration
+        self.date = date
     }
 }
 
