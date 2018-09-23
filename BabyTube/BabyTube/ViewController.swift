@@ -14,6 +14,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBOutlet weak var table: UITableView!
     
+    @IBOutlet weak var searchBar: UITextField!
+    
     @IBOutlet weak var logoImage: UIImageView!
     var videoArray = [Video]()
     
@@ -81,6 +83,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             logoImage.isHidden = true
             isShowingSearchBar = true
+            searchBar.isHidden = false
             
             searchButton.setImage(#imageLiteral(resourceName: "CancelImage"), for: UIControlState.normal)
         }
@@ -88,10 +91,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             logoImage.isHidden = false
             isShowingSearchBar = false
+            searchBar.isHidden = true
             searchButton.setImage(#imageLiteral(resourceName: "SearchImage"),for: UIControlState.normal)
         }
         
     }
+    
+    @IBAction func SearchAction(_ sender: Any) {
+        print("Search Now: "+searchBar.text!)
+        searchBar.resignFirstResponder()
+    }
+    
     
 
 }
