@@ -8,20 +8,25 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     
 
     @IBOutlet weak var table: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var logoImage: UIImageView!
     var videoArray = [Video]()
+    
+    @IBOutlet weak var searchButton: UIButton!
+    private var isShowingSearchBar: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.table.delegate = self
         self.table.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        isShowingSearchBar = false
         setUpVideos()
+        setUpSearchBar()
     }
 
     private func setUpVideos()
@@ -31,6 +36,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         videoArray.append(Video(title: "Best Shows Ep 2", videoImg: #imageLiteral(resourceName: "5"), channel: "Best of Netflix ", type: VideoType.episode, duration: "3:13", date: "Published on Sep 27, 2013"))
         videoArray.append(Video(title: "Episode 2", videoImg: #imageLiteral(resourceName: "4"), channel: "The Office US", type: VideoType.episode, duration: "3:14", date: "Published on Sep 17, 2017"))
         videoArray.append(Video(title: "Jim and Pam", videoImg: #imageLiteral(resourceName: "2"), channel: "Best of Netflix ", type: VideoType.movie, duration: "3:15", date: "Published on Sep 21, 2011"))
+        
+    }
+    
+    private func setUpSearchBar()
+    {
         
     }
     
@@ -65,6 +75,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return 330
     }
     
+    
+    @IBAction func ShowSearchBar(_ sender: Any) {
+        if(!isShowingSearchBar)
+        {
+            logoImage.isHidden = true
+            isShowingSearchBar = true
+            
+            searchButton.setImage(#imageLiteral(resourceName: "CancelImage"), for: UIControlState.normal)
+        }
+        else
+        {
+            logoImage.isHidden = false
+            isShowingSearchBar = false
+            searchButton.setImage(#imageLiteral(resourceName: "SearchImage"),for: UIControlState.normal)
+        }
+        
+    }
     
 
 }
