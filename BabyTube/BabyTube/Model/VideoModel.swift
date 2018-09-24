@@ -11,6 +11,8 @@ import Alamofire
 import SwiftyJSON
 
 class Video {
+    
+    public var id: String
     public var title: String
     public var videoImg: String
     public var channel: String
@@ -18,8 +20,9 @@ class Video {
     public var date: String
     public var type: VideoType
     
-    init(title: String, videoImg: String, channel: String, type: VideoType, duration: String, date: String)
+    init(id: String, title: String, videoImg: String, channel: String, type: VideoType, duration: String, date: String)
     {
+        self.id = id
         self.title = title
         self.videoImg = videoImg
         self.channel = channel
@@ -29,6 +32,7 @@ class Video {
     }
     
     init() {
+        self.id = ""
         self.title = ""
         self.videoImg = ""
         self.channel = ""
@@ -54,11 +58,11 @@ class VideoModel
     public static func retriveVideosFromStaticSource() ->[Video]
     {
         var videos = [Video]()
-        videos.append(Video(title: "Episode 1", videoImg: "1", channel: "The Office US", type: VideoType.episode, duration: "3:11", date: "Published on Sep 21, 2027"))
-        videos.append(Video(title: "Best Prank", videoImg: "2", channel: "The Office Jokes", type: VideoType.movie, duration: "3:12", date: "Published on Sep 22, 2017"))
-        videos.append(Video(title: "Best Shows Ep 2", videoImg: "3", channel: "Best of Netflix ", type: VideoType.episode, duration: "3:13", date: "Published on Sep 27, 2013"))
-        videos.append(Video(title: "Episode 2", videoImg: "4", channel: "The Office US", type: VideoType.episode, duration: "3:14", date: "Published on Sep 17, 2017"))
-        videos.append(Video(title: "Jim and Pam", videoImg: "5", channel: "Best of Netflix ", type: VideoType.movie, duration: "3:15", date: "Published on Sep 21, 2011"))
+        videos.append(Video(id: "id", title: "Episode 1", videoImg: "1", channel: "The Office US", type: VideoType.episode, duration: "3:11", date: "Published on Sep 21, 2027"))
+        videos.append(Video(id: "id",title: "Best Prank", videoImg: "2", channel: "The Office Jokes", type: VideoType.movie, duration: "3:12", date: "Published on Sep 22, 2017"))
+        videos.append(Video(id: "id",title: "Best Shows Ep 2", videoImg: "3", channel: "Best of Netflix ", type: VideoType.episode, duration: "3:13", date: "Published on Sep 27, 2013"))
+        videos.append(Video(id: "id",title: "Episode 2", videoImg: "4", channel: "The Office US", type: VideoType.episode, duration: "3:14", date: "Published on Sep 17, 2017"))
+        videos.append(Video(id: "id",title: "Jim and Pam", videoImg: "5", channel: "Best of Netflix ", type: VideoType.movie, duration: "3:15", date: "Published on Sep 21, 2011"))
         
         return videos
     }
@@ -68,7 +72,7 @@ class VideoModel
         var  videos = [Video]()
         
         var counter: Int = 0
-        let parameters: Parameters = ["part": "snippet", "q":query, "maxResults":"10", "key":API_KEY]
+        let parameters: Parameters = ["part": "snippet", "q":query, "maxResults":"15", "key":API_KEY]
         
         Alamofire.request("https://www.googleapis.com/youtube/v3/search", method: .get, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON{ response in
             
@@ -83,6 +87,9 @@ class VideoModel
                     {
                         if(subJsonDos["id"]["kind"] != "youtube#channel")
                         {
+                            //let amountOfVideos = subJsonDos.array?.count
+                            
+                            let id = subJsonDos["id"]["videoId"].stringValue
                             let title = subJsonDos["snippet"]["title"].stringValue
                             let date  = subJsonDos["snippet"]["publishedAt"].stringValue
                             let channel = subJsonDos["snippet"]["channelTitle"].stringValue
@@ -107,16 +114,17 @@ class VideoModel
                                         var videoToInsert : Video = Video()
                                         
                                         print("--------New Video-------\n" )
+                                        videoToInsert.id = id
                                         videoToInsert.title = title
                                         videoToInsert.channel = channel
                                         videoToInsert.duration = parseDuration(duration: duration)
-                                        videoToInsert.date = date
+                                        videoToInsert.date = parseDate(date: date)
                                         videoToInsert.videoImg = thumbnail
                                         videoToInsert.type = VideoType.movie
                                         videos.append(videoToInsert)
-                                        print(videoToInsert.title + "\n" +  videoToInsert.channel + "\n" +  videoToInsert.date + "\n" +  videoToInsert.duration + "\n")
+                                        print(videoToInsert.id + "\n" + videoToInsert.title + "\n" +  videoToInsert.channel + "\n" +  videoToInsert.date + "\n" +  videoToInsert.duration + "\n")
                                         
-                                        if(videos.count == 9)
+                                        if(videos.count == 10)
                                         {
                                             completion(videos)
                                         }
@@ -139,18 +147,18 @@ class VideoModel
     {
         if(duration.count < 5) {return "LIVE"} // TO IMPROVE
         let index = duration.index(duration.startIndex, offsetBy: 2)
-        print("duracion: "+duration)
+        
         let shortTime = String(duration[index...])
         let indexFin = shortTime.index(shortTime.endIndex, offsetBy: -2)
-        print("shortTime: "+shortTime)
+      
         let justM = String(shortTime[...indexFin])
         let indexM = justM.index(of: "M")
-        print("justM: "+justM)
+        
         //let mins = String(justM[...indexM])
         let minutes = String(justM[...justM.index(before: indexM!)])
-        print("minutes: "+minutes)
+        
         let seconds = String(justM[justM.index(after: indexM!)...])
-        print("seconds: "+seconds)
+        
         //let mIndex = duration.index(of: "M")
         //let minutes = shortTime.substring(to: shortTime.index(before: mIndex!))
         if(seconds.count<2)
@@ -161,8 +169,13 @@ class VideoModel
         {
             return minutes+":"+seconds
         }
-        
-        
+    }
+    
+    public static func parseDate(date: String) -> String
+    {
+        let indexT = date.index(of: "T")
+        let shortDate = String(date[...date.index(before:indexT!)])
+        return "Uploaded on: " + shortDate
     }
     
 }

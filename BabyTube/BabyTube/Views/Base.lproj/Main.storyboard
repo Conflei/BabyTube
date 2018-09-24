@@ -78,6 +78,27 @@
                                     <constraint firstAttribute="height" constant="78" id="qrH-UU-Hpw"/>
                                 </constraints>
                             </view>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="box" translatesAutoresizingMaskIntoConstraints="NO" id="SAG-2a-n2Q" userLabel="ModalBg">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <wkWebView hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ba4-Jo-sTj">
+                                <rect key="frame" x="0.0" y="177" width="375" height="182"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FKr-8D-jkB">
+                                <rect key="frame" x="313" y="124" width="46" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="CancelImage"/>
+                                <connections>
+                                    <action selector="closeModal:" destination="6Rd-jJ-9Je" eventType="touchUpInside" id="ARx-sB-H4H"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -95,9 +116,12 @@
                     </view>
                     <connections>
                         <outlet property="logoImage" destination="Smy-fO-ZDr" id="0eN-U7-Z4d"/>
+                        <outlet property="modalBG" destination="SAG-2a-n2Q" id="8Xr-Zs-9kx"/>
+                        <outlet property="modalButton" destination="FKr-8D-jkB" id="1WI-K6-CYT"/>
                         <outlet property="searchBar" destination="18v-Bh-fiR" id="JOE-5S-pls"/>
                         <outlet property="searchButton" destination="WVY-eX-IK5" id="gSH-U6-vzK"/>
                         <outlet property="table" destination="29J-WB-r9M" id="zEb-Lg-IDT"/>
+                        <outlet property="webView" destination="ba4-Jo-sTj" id="w07-YC-iVM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n7K-ka-wG2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -106,7 +130,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="CancelImage" width="128" height="128"/>
         <image name="Logo" width="209" height="40"/>
         <image name="SearchImage" width="128" height="128"/>
+        <image name="box" width="182" height="170"/>
     </resources>
 </document>

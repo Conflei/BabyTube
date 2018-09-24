@@ -9,12 +9,13 @@
 import UIKit
 import Alamofire
 import SDWebImage
-
+import WebKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     
-
+    
+    
     @IBOutlet weak var table: UITableView!
     
     @IBOutlet weak var searchBar: UITextField!
@@ -25,6 +26,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var searchButton: UIButton!
     private var isShowingSearchBar: Bool = false
     
+    
+   
+    
+    @IBOutlet var modalButton: UIButton!
+    
+    @IBOutlet var modalBG: UIImageView!
+    
+    @IBOutlet weak var webView: WKWebView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.table.delegate = self
@@ -72,6 +81,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return 330
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var index = indexPath.row
+        //print("User Selected: "+videoArray[index].title)
+        webView.isHidden = false
+        let videoCode = videoArray[index].id
+        let murl = URL(string: "https://www.youtube.com/embed/\(videoCode)")
+        
+        webView.load(URLRequest(url: murl!))
+        modalButton.isHidden = false
+        modalBG.isHidden = false
+        webView.isHidden = false
+    }
+    
     
     @IBAction func showSearchBar(_ sender: Any) {
         if(!isShowingSearchBar)
@@ -90,6 +112,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             searchButton.setImage(#imageLiteral(resourceName: "SearchImage"),for: UIControlState.normal)
         }
         
+    }
+    @IBAction func closeModal(_ sender: Any) {
+        modalButton.isHidden = true
+        modalBG.isHidden = true
+        webView.isHidden = true
     }
     
     @IBAction func searchAction(_ sender: Any) {
