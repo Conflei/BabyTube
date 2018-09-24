@@ -99,27 +99,3 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
 }
 
-class Video {
-    let title: String
-    let videoImg: UIImage
-    let channel: String
-    let duration: String
-    let date: String
-    let type: VideoType
-    
-    init(title: String, videoImg: UIImage, channel: String, type: VideoType, duration: String, date: String)
-    {
-        self.title = title
-        self.videoImg = videoImg
-        self.channel = channel
-        self.type = type
-        self.duration = duration
-        self.date = date
-    }
-}
-
-enum VideoType: String {
-    case episode = "Episode"
-    case movie = "SoloVideo"
-}
-
