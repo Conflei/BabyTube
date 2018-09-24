@@ -70,10 +70,10 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.73333333333333328" green="0.81960784313725488" blue="0.91764705882352937" alpha="0.20156250000000001" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0039215686269999999" green="0.41568627450000001" blue="0.78039215689999997" alpha="0.56642857142857139" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.015686274509803921" green="0.031372549019607843" blue="0.058823529411764705" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.98679840880000003" green="1" blue="0.98823366859999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </subviews>
                 <color key="backgroundColor" red="0.015686274509803921" green="0.031372549019607843" blue="0.058823529411764705" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

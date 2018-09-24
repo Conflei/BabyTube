@@ -145,18 +145,18 @@ class VideoModel
     
     public static func parseDuration(duration: String) -> String
     {
-        if(duration.count < 5) {return "LIVE"} // TO IMPROVE
+        if(duration.count < 6) {return "LIVE"} // TO IMPROVE
         let index = duration.index(duration.startIndex, offsetBy: 2)
-        
+        print(duration)
         let shortTime = String(duration[index...])
         let indexFin = shortTime.index(shortTime.endIndex, offsetBy: -2)
-      
+        print(shortTime)
         let justM = String(shortTime[...indexFin])
         let indexM = justM.index(of: "M")
-        
+        print(justM)
         //let mins = String(justM[...indexM])
         let minutes = String(justM[...justM.index(before: indexM!)])
-        
+        print(minutes)
         let seconds = String(justM[justM.index(after: indexM!)...])
         
         //let mIndex = duration.index(of: "M")

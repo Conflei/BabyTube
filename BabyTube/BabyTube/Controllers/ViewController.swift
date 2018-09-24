@@ -37,7 +37,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         self.table.delegate = self
-        self.table.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        self.table.backgroundColor = #colorLiteral(red: 0.9867984088, green: 1, blue: 0.9882336686, alpha: 1)
         isShowingSearchBar = false
         //setUpVideos(videoArray: VideoModel.retriveVideosFromStaticSource())
         //setUpVideos(videoArray: VideoModel.retriveVideosFromYoutube(query: "Post Malone"))
@@ -62,7 +62,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.date.text = videoArray[indexPath.row].date
         cell.duration.text = videoArray[indexPath.row].duration
         
-        cell.videoImg.sd_setImage(with: URL(string: videoArray[indexPath.row].videoImg), placeholderImage: #imageLiteral(resourceName: "4"))
+        cell.videoImg.sd_setImage(with: URL(string: videoArray[indexPath.row].videoImg), placeholderImage: #imageLiteral(resourceName: "placeholder"))
         
         if(videoArray[indexPath.row].type.rawValue == "Episode")
         {
