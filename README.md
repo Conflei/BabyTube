@@ -1,8 +1,14 @@
 # BabyTube
 YouTube API usage on Swift app
 ## On Progress
-Working on UI until it looks similar to the design
+Polishing details on UI
 ```
 Test
 ```
-* [Youtube API](http://www.youtube.com) - The web framework used
+
+### Tools that I used for this project
+* [Youtube API V3](http://www.youtube.com) - To retrevie the data and obtain my API key for my requests
+* [Alamofire](https://github.com/Alamofire/Alamofire) - To handle my HTTP requests
+* [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) - To handle my JSON Data easier 
+
+
