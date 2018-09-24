@@ -12,13 +12,13 @@ import SwiftyJSON
 
 class Video {
     public var title: String
-    public var videoImg: UIImage
+    public var videoImg: String
     public var channel: String
     public var duration: String
     public var date: String
     public var type: VideoType
     
-    init(title: String, videoImg: UIImage, channel: String, type: VideoType, duration: String, date: String)
+    init(title: String, videoImg: String, channel: String, type: VideoType, duration: String, date: String)
     {
         self.title = title
         self.videoImg = videoImg
@@ -30,7 +30,7 @@ class Video {
     
     init() {
         self.title = ""
-        self.videoImg = #imageLiteral(resourceName: "4")
+        self.videoImg = ""
         self.channel = ""
         self.type = VideoType.movie
         self.duration = ""
@@ -47,26 +47,28 @@ enum VideoType: String {
 class VideoModel
 {
     
+    static var currentVideos: [Video] = []
+    
     static let API_KEY: String = "AIzaSyDavu9Lv7W-EAWvYUju5iV2OmOZpOb0lkk"
     
     public static func retriveVideosFromStaticSource() ->[Video]
     {
         var videos = [Video]()
-        videos.append(Video(title: "Episode 1", videoImg: #imageLiteral(resourceName: "1"), channel: "The Office US", type: VideoType.episode, duration: "3:11", date: "Published on Sep 21, 2027"))
-        videos.append(Video(title: "Best Prank", videoImg: #imageLiteral(resourceName: "2"), channel: "The Office Jokes", type: VideoType.movie, duration: "3:12", date: "Published on Sep 22, 2017"))
-        videos.append(Video(title: "Best Shows Ep 2", videoImg: #imageLiteral(resourceName: "5"), channel: "Best of Netflix ", type: VideoType.episode, duration: "3:13", date: "Published on Sep 27, 2013"))
-        videos.append(Video(title: "Episode 2", videoImg: #imageLiteral(resourceName: "4"), channel: "The Office US", type: VideoType.episode, duration: "3:14", date: "Published on Sep 17, 2017"))
-        videos.append(Video(title: "Jim and Pam", videoImg: #imageLiteral(resourceName: "2"), channel: "Best of Netflix ", type: VideoType.movie, duration: "3:15", date: "Published on Sep 21, 2011"))
+        videos.append(Video(title: "Episode 1", videoImg: "1", channel: "The Office US", type: VideoType.episode, duration: "3:11", date: "Published on Sep 21, 2027"))
+        videos.append(Video(title: "Best Prank", videoImg: "2", channel: "The Office Jokes", type: VideoType.movie, duration: "3:12", date: "Published on Sep 22, 2017"))
+        videos.append(Video(title: "Best Shows Ep 2", videoImg: "3", channel: "Best of Netflix ", type: VideoType.episode, duration: "3:13", date: "Published on Sep 27, 2013"))
+        videos.append(Video(title: "Episode 2", videoImg: "4", channel: "The Office US", type: VideoType.episode, duration: "3:14", date: "Published on Sep 17, 2017"))
+        videos.append(Video(title: "Jim and Pam", videoImg: "5", channel: "Best of Netflix ", type: VideoType.movie, duration: "3:15", date: "Published on Sep 21, 2011"))
         
         return videos
     }
     
-    public static func retriveVideosFromYoutube(query: String) -> [Video]
+    public static func retriveVideosFromYoutube(query: String, completion: @escaping ((_ data: [Video]) -> Void))
     {
-        let videos = [Video]()
+        var  videos = [Video]()
         
-        
-        let parameters: Parameters = ["part": "snippet", "q":"Boku no hero", "maxResults":"10", "key":API_KEY]
+        var counter: Int = 0
+        let parameters: Parameters = ["part": "snippet", "q":query, "maxResults":"10", "key":API_KEY]
         
         Alamofire.request("https://www.googleapis.com/youtube/v3/search", method: .get, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON{ response in
             
@@ -93,7 +95,7 @@ class VideoModel
                             Alamofire.request("https://www.googleapis.com/youtube/v3/videos", method: .get, parameters: videoParameters, encoding: URLEncoding.default, headers: nil).responseJSON{ videoResponse in
                                 
                                 let videoJson = JSON(videoResponse.result.value as Any)
-                                
+                                //print(videoResponse.result.value)
                                 for(videoKey, videoSubJson):(String, JSON) in videoJson
                                 {
                                    
@@ -108,10 +110,15 @@ class VideoModel
                                         videoToInsert.channel = channel
                                         videoToInsert.duration = duration
                                         videoToInsert.date = date
-                                        videoToInsert.videoImg = #imageLiteral(resourceName: "CancelImage")
+                                        videoToInsert.videoImg = thumbnail
                                         videoToInsert.type = VideoType.movie
-
+                                        videos.append(videoToInsert)
                                         print("--------New Video-------\n" +  videoToInsert.title + "\n" +  videoToInsert.channel + "\n" +  videoToInsert.date + "\n" +  videoToInsert.duration + "\n")
+                                        
+                                        if(videos.count == 9)
+                                        {
+                                            completion(videos)
+                                        }
                                     }
                                 }
 
@@ -125,8 +132,6 @@ class VideoModel
             }
         }
         
-        
-        return videos
     }
     
 }

@@ -49,7 +49,7 @@
                                         </constraints>
                                         <state key="normal" image="SearchImage"/>
                                         <connections>
-                                            <action selector="ShowSearchBar:" destination="6Rd-jJ-9Je" eventType="touchUpInside" id="tXf-oE-JWm"/>
+                                            <action selector="showSearchBar:" destination="6Rd-jJ-9Je" eventType="touchUpInside" id="qBU-yy-dsT"/>
                                         </connections>
                                     </button>
                                     <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Videos" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="18v-Bh-fiR">
@@ -62,7 +62,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="search" textContentType="name"/>
                                         <connections>
-                                            <action selector="SearchAction:" destination="6Rd-jJ-9Je" eventType="primaryActionTriggered" id="c7b-ny-n2V"/>
+                                            <action selector="searchAction:" destination="6Rd-jJ-9Je" eventType="primaryActionTriggered" id="CTI-dR-uMj"/>
                                         </connections>
                                     </textField>
                                 </subviews>

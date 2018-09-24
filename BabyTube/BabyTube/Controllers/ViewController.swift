@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SDWebImage
 
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
@@ -30,7 +31,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.table.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         isShowingSearchBar = false
         //setUpVideos(videoArray: VideoModel.retriveVideosFromStaticSource())
-        setUpVideos(videoArray: VideoModel.retriveVideosFromYoutube(query: "Post Malone"))
+        //setUpVideos(videoArray: VideoModel.retriveVideosFromYoutube(query: "Post Malone"))
+        VideoModel.retriveVideosFromYoutube(query: "The Office"){ [weak self] (data: [Video]) in self?.refreshTableData(newVids: data)}
     }
 
     private func setUpVideos(videoArray: [Video])
@@ -51,7 +53,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.date.text = videoArray[indexPath.row].date
         cell.duration.text = videoArray[indexPath.row].duration
         
-        cell.videoImg.image = videoArray[indexPath.row].videoImg
+        cell.videoImg.sd_setImage(with: URL(string: videoArray[indexPath.row].videoImg), placeholderImage: #imageLiteral(resourceName: "4"))
         
         if(videoArray[indexPath.row].type.rawValue == "Episode")
         {
@@ -93,6 +95,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func searchAction(_ sender: Any) {
         print("Search Now: "+searchBar.text!)
         searchBar.resignFirstResponder()
+        
+        VideoModel.retriveVideosFromYoutube(query: searchBar.text!){ [weak self] (data: [Video]) in self?.refreshTableData(newVids: data)}
+    }
+    
+    public func refreshTableData(newVids: [Video])
+    {
+        self.videoArray = newVids
+        print("Updating Videos, First title: ")
+        print(self.videoArray.count)
+        table.reloadData()
     }
     
     
