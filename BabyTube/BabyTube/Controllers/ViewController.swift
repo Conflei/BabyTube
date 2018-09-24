@@ -32,7 +32,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         isShowingSearchBar = false
         //setUpVideos(videoArray: VideoModel.retriveVideosFromStaticSource())
         //setUpVideos(videoArray: VideoModel.retriveVideosFromYoutube(query: "Post Malone"))
-        VideoModel.retriveVideosFromYoutube(query: "The Office"){ [weak self] (data: [Video]) in self?.refreshTableData(newVids: data)}
+        VideoModel.retriveVideosFromYoutube(query: "funny babies"){ [weak self] (data: [Video]) in self?.refreshTableData(newVids: data)}
     }
 
     private func setUpVideos(videoArray: [Video])

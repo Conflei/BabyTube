@@ -73,7 +73,7 @@ class VideoModel
         Alamofire.request("https://www.googleapis.com/youtube/v3/search", method: .get, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON{ response in
             
             let json = JSON(response.result.value as Any)
-            
+            //print(response.result.value)
             for(key, subJson):(String, JSON) in json
             {
                 
@@ -106,14 +106,15 @@ class VideoModel
                                         
                                         var videoToInsert : Video = Video()
                                         
+                                        print("--------New Video-------\n" )
                                         videoToInsert.title = title
                                         videoToInsert.channel = channel
-                                        videoToInsert.duration = duration
+                                        videoToInsert.duration = parseDuration(duration: duration)
                                         videoToInsert.date = date
                                         videoToInsert.videoImg = thumbnail
                                         videoToInsert.type = VideoType.movie
                                         videos.append(videoToInsert)
-                                        print("--------New Video-------\n" +  videoToInsert.title + "\n" +  videoToInsert.channel + "\n" +  videoToInsert.date + "\n" +  videoToInsert.duration + "\n")
+                                        print(videoToInsert.title + "\n" +  videoToInsert.channel + "\n" +  videoToInsert.date + "\n" +  videoToInsert.duration + "\n")
                                         
                                         if(videos.count == 9)
                                         {
@@ -131,6 +132,36 @@ class VideoModel
                 }
             }
         }
+        
+    }
+    
+    public static func parseDuration(duration: String) -> String
+    {
+        if(duration.count < 5) {return "LIVE"} // TO IMPROVE
+        let index = duration.index(duration.startIndex, offsetBy: 2)
+        print("duracion: "+duration)
+        let shortTime = String(duration[index...])
+        let indexFin = shortTime.index(shortTime.endIndex, offsetBy: -2)
+        print("shortTime: "+shortTime)
+        let justM = String(shortTime[...indexFin])
+        let indexM = justM.index(of: "M")
+        print("justM: "+justM)
+        //let mins = String(justM[...indexM])
+        let minutes = String(justM[...justM.index(before: indexM!)])
+        print("minutes: "+minutes)
+        let seconds = String(justM[justM.index(after: indexM!)...])
+        print("seconds: "+seconds)
+        //let mIndex = duration.index(of: "M")
+        //let minutes = shortTime.substring(to: shortTime.index(before: mIndex!))
+        if(seconds.count<2)
+        {
+            return minutes+":0"+seconds
+        }
+        else
+        {
+            return minutes+":"+seconds
+        }
+        
         
     }
     
