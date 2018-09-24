@@ -16,6 +16,8 @@ By the time I made this project I was about to have my first kid so, I was kinda
 * [Alamofire](https://github.com/Alamofire/Alamofire) - To handle my HTTP requests
 * [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) - To handle my JSON Data easier 
 * [SDWebImage](https://github.com/rs/SDWebImage) - To download the thumbnails asynchronously  
+* [Sketchapp](https://sketchapp.com/) - And also Photoshop for some design and concept art 
+
 
 
 
